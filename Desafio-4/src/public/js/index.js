@@ -10,7 +10,6 @@ const inputStock = document.getElementById("stock");
 const inputCategory = document.getElementById("category");
 const formDelete = document.getElementById("Form delete product");
 const inputIdDelete = document.getElementById("idDelete");
-const inputTitleDelete = document.getElementById("titleDelete");
 
 
 
@@ -62,7 +61,11 @@ form.onsubmit = (e) => {
     stock,
     category,
   });
-
+  Swal.fire(
+    'Producto agregado!',
+    'Presiona el boton!',
+    'success'
+  )
   
 };
 
@@ -75,10 +78,15 @@ socketClient.on("updateProduct", (products) => {
 formDelete.onsubmit = (e) => {
   e.preventDefault();
 
-  const titleDelete = inputTitleDelete.value;
   const idDelete = inputIdDelete.value;
 
   socketClient.emit("deleteProduct", idDelete);
+
+  Swal.fire(
+    'Producto eliminado!',
+    'Presiona el boton!',
+    'success'
+  )
   
 };
 
