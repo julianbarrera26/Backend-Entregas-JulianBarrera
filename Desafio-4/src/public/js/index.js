@@ -8,7 +8,6 @@ const inputPrice = document.getElementById("price");
 const inputCode = document.getElementById("code");
 const inputStock = document.getElementById("stock");
 const inputCategory = document.getElementById("category");
-const inputThumbnails=document.getElementById("thumbnails");
 const formDelete = document.getElementById("Form delete product");
 const inputIdDelete = document.getElementById("idDelete");
 const inputTitleDelete = document.getElementById("titleDelete");
@@ -25,13 +24,12 @@ const listaDeProductosActualizados = (products) => {
     html += `
              
               <h3>titulo: ${product.title}</h3>
+              <p>ID: ${product.id}</p>
               <p>descripcion: ${product.description}</p>
               <p>precio: ${product.price}</p>
               <p>codigo: ${product.code}</p>
               <p>categoria: ${product.category}</p>
               <p>stock: ${product.stock}</p>
-              <p>thumbnails: ${product.thumbnails}</p>
-              <p>id: ${product.id}</p>
               <br></br>
       
           `;
@@ -54,7 +52,6 @@ form.onsubmit = (e) => {
   const code = inputCode.value;
   const stock = inputStock.value;
   const category = inputCategory.value;
-  const thumbnails= inputThumbnails.value;
 
   socketClient.emit("addProduct", {
     title,
@@ -64,7 +61,6 @@ form.onsubmit = (e) => {
     code,
     stock,
     category,
-    thumbnails,
   });
 
   
