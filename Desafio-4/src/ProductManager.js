@@ -1,14 +1,10 @@
-import {existsSync, promises} from 'fs';
+import { existsSync, promises } from "fs";
 
 
 class ProductManager { 
-    constructor(path) {
-        if (path) {
-            this.path = path;
-        } else {
-            console.log(`El archivo ${path} no existe.`);
-        }
-    }
+    constructor() {
+        this.path = "products.json";
+      }
    
     async getProducts() {
         
@@ -33,38 +29,38 @@ class ProductManager {
     //}
     async addProduct (product){
         try {
-            const {title,description,price,thumbmail, code, stock} = product 
-            if (!title || !description || !price || !thumbmail || !stock || !code) {
+
+            const products = await this.getProducts()
+            const {title,description,status,price,thumbmail, code, stock, category} = product 
+            if (!title || !description || !status|| !price || !code|| !stock || !category) {
                 console.log("Agregar todos los campos")
                 return
             }
 
             
-            const products = await this.getProducts()
 
             
-            let id 
+            let id ;
             if(!products.length){
                 id = 1
             } else {
-                id = products[products.length-1].id + 1
+                id = products[products.length-1].id + 1;
             }
             
-
             const isCodeAlreadyAdded = products.some((prod)=> prod.code === code)
             if (isCodeAlreadyAdded) {
-                console.log("El codigo del producto ya existe ")
+                console.log("Warning! The product code already exists")
                 return
             }
-
             
-            const newProduct = {id, ...product}
+            const newProduct = {id, ...product, status: true}
 
             products.push(newProduct)
 
 
-            await fs.promises.writeFile(this.path, JSON.stringify(products))
+            await promises.writeFile(this.path, JSON.stringify(products))
             console.log('Producto añadido')
+            return newProduct
         }
         catch (error) {
             console.log(error)
@@ -93,130 +89,56 @@ class ProductManager {
         }
     }    
     
-    async createProduct(product) {
-        try{
-            const products = await this.getProducts({})
-            let id
-            if(!products.length){
-                id = 1;
-            }else{
-                id = products [products.length-1].id + 1;
+   
+    async updateProduct(id, obj) {
+        try {            
+           
+            const products = await this.getProducts()            
+
+            
+            const prodIndex = products.findIndex(p=> p.id == id)
+            
+            
+            if (prodIndex !== -1) {
+                const updatedProduct = {...products[prodIndex], ...obj}
+                products.splice(prodIndex, 1, updatedProduct) 
+                   
+                       
+                await promises.writeFile(this.path, JSON.stringify(products))
+                return updatedProduct
+            }            
             }
-            const newProduct = {id, ...product, status: true};
-            products.push ({newProduct});
-            await fs.promises.writeFile(this.path,JSON.stringify(products));
-        }catch(error){
+        catch (error) {
             return error
         }
     }
 
-    async updateProduct(id, updatedProduct) {
-        try {
-        const products = await this.getProducts();
-    
-
-        const index = products.findIndex((product) => product.id === id);
-    
-        if (index === -1) {
-            return 'Product no existe';
-        }
-    
-        
-        products[index] = { ...products[index], ...updatedProduct };
-    
-        
-        await fs.promises.writeFile(this.path, JSON.stringify(products));
-    
-        
-        return products[index];
-        } catch (error) {
-            return error;
-        }
-    }
     
     
     async deleteProduct(id) {
         try {
-        const products = await this.getProducts();
-    
-    
-        const updatedProducts = products.filter((product) => product.id !== id);
-    
-        if (products.length === updatedProducts.length) {
             
-            return 'Producto eliminado';
+            const products = await this.getProducts()
+
+            
+            const idExists = products.find(p=> p.id === id)  
+
+            
+           
+            if (idExists){
+                const newArrayProducts = products.filter(p=> p.id !== id)
+                await promises.writeFile(this.path, JSON.stringify(newArrayProducts))
+                return idExists            
+            }             
+            }
+        catch (error) {
+            return error
         }
-    
-        
-        await fs.promises.writeFile(this.path, JSON.stringify(updatedProducts));
-    
-    
-        return 'Producto eliminado';
-        } catch (error) {
-        return error;
-        }
-    }     
+    }
 
 
 }
-    const product1={title: 'iPhone',
-    description: 'Un teléfono iPhone',
-    price: 2500,
-    thumbmail: 'imagen',
-    code: 'code-01',
-    stock: 10,};
 
-    const product2={
-        title: 'Samsung',
-        description: 'Un teléfono Samsung',
-        price: 2500,
-        thumbmail: 'imagen',
-        code: 'code-02',
-        stock: 10,
-
-    };
-
-
-
-async function test() {
-
-        const manager = new ProductManager("products.json");
-        //await manager.createProduct(product1);
-        //await manager.createProduct(product2);
-
- }
-    //    await productManager.createProduct({
-    //        title: 'iPhone',
-     //       description: 'Un teléfono iPhone',
-      //      price: 2500,
-     //       thumbnail: 'imagen',
-      //      code: 'code-01',
-      //      stock: 10,
-     //   });
-        
-      //  await productManager.createProduct({
-      //      title: 'Samsung',
-      //      description: 'Un teléfono Samsung',
-      //      price: 2500,
-       //     thumbnail: 'imagen',
-      //      code: 'code-02',
-      //      stock: 10,
-       // });
-        
-       // console.log(await productManager.getProductById(1));
-       // }
-        
-       //test();
-        
-        
-        
-        //await productManager.updateProduct(1, {
-            //title: '',
-           // price: ,
-          //});
-          
-          // Eliminar un producto por ID
-          //await productManager.deleteProduct(2);
-          export const manager = new ProductManager("./data/myprods.json");  
+          export const manager = new ProductManager("../products.json");  
         
         

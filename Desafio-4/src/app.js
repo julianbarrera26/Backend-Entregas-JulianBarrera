@@ -10,7 +10,7 @@ import {manager} from './ProductManager.js'
 
 
 const app = express();
-const port = 8070;
+const port = 8080;
 
 app.use (express.json());
 app.use(express.urlencoded({extended: true}));
@@ -31,10 +31,13 @@ const httpServer = app.listen(port, () => {
 
 const socketServer = new Server(httpServer);
 
-socketServer.on("connection", async (socket) => {
-  const productosOld = await manager.getProducts();
+const allProducts= await manager.getProducts();
 
-  socket.emit("productsInitial", productosOld);
+socketServer.on("connection", async (socket) => {
+
+  console.log(`cliente conectado: ${socket.id}`);
+
+  socket.emit("productsInitial", allProducts)
 
   socket.on("addProduct", async (product) => {
     const producto = await manager.addProduct(product);
@@ -44,19 +47,18 @@ socketServer.on("connection", async (socket) => {
     socket.emit("productUpdate", productosActualizados);
 
     console.log(product);
-  });
+  })
 
   socket.on("deleteProduct", async (productId) => {
-    const productosOld = await manager.getProducts();
 
-    const producto = await manager.deleteProductById(+productId);
+    const producto = await manager.deleteProduct(+productId);
 
     const productosActualizados = await manager.getProducts();
 
-    socket.emit("updateProduct", productosActualizados);
+    socket.emit("productDelete", productosActualizados);
 
     
-  });
+  })
 
 
 });

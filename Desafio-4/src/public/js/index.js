@@ -15,13 +15,14 @@ const inputTitleDelete = document.getElementById("titleDelete");
 
 
 
+
 const listaDeProductosActualizados = (products) => {
-    let divRealTimeProduct = document.getElementById("divRealTimeProduct");
-  
-    let html = "";
-  
-    products.forEach((product) => {
-      html += `
+  let divRealTimeProduct = document.getElementById("divRealTimeProduct");
+
+  let html = "";
+
+  products.forEach((product) => {
+    html += `
              
               <h3>titulo: ${product.title}</h3>
               <p>descripcion: ${product.description}</p>
@@ -34,9 +35,9 @@ const listaDeProductosActualizados = (products) => {
               <br></br>
       
           `;
-      divRealTimeProduct.innerHTML = html;
-    });
-  };
+    divRealTimeProduct.innerHTML = html;
+  });
+};
 
 
 socketClient.on("productsInitial", (products) => {
@@ -85,6 +86,6 @@ formDelete.onsubmit = (e) => {
   
 };
 
-socketClient.on("deleteProduct", (products) => {
+socketClient.on("productDelete", (products) => {
   listaDeProductosActualizados(products);
 });

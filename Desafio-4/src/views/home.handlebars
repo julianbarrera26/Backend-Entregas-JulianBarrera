@@ -1,7 +1,10 @@
-{{#each products}}
-
-<h2>{{title}}</h2>
-<p>{{description}}</p>
-<p> {{price}}</p>
-
+{{#each response}}
+  <h2>{{this.title}}</h2>
+  <p>{{this.description}}</p>
+  <p> {{this.price}}</p>
+  <p> {{this.code}}</p>
+  <p> {{this.category}}</p>
+  <p> {{this.stock}}</p>
+  <p> {{this.thumbnails}}</p>
+  <p> {{this.id}}</p>
 {{/each}}
