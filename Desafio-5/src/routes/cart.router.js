@@ -16,10 +16,10 @@ router.post('/:cid', async (req, res)=>{
 
 
 
-router.post('/:cid/product/:pid', async (req, res) =>{    
+router.post('/:cid/products/:pid', async (req, res) =>{    
     try{
         const {cid, pid} = req.params        
-        const response = await cartManager.addProductToCart(cid, +pid)        
+        const response = await cartManager.addProductToCart(cid, pid)        
         res.status(200).json({message: "Product added to cart", productAdded: response})        
     }
     catch(error){
