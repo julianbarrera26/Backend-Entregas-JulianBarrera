@@ -49,6 +49,14 @@ class ProductsManager {
         }
       
       }
+     async getProductsView ()  {
+        try {
+            return await productsModel.find().lean();
+
+        } catch (err) {
+            return err
+        }
+    }
 
     async getProducts  (filter, options) {
         try {
