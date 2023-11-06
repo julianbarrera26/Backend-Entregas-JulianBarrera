@@ -39,7 +39,7 @@ router.get("/", async (req, res) => {
 router.get('/:id', async (req, res) => {
     try{
         const {id} = req.params
-        const productById = await productsManager.findById(id)        
+        const productById = await productsManager.getProductById(id)        
         res.status(200).json({ message: "Product found", productById });
     }
     catch(error){

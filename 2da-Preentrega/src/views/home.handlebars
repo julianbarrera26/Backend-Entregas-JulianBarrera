@@ -1,47 +1,38 @@
-<div id="contenedor">
-     {{#each listadeproductos}}
-    <div class="card">
-        <div class="basicInfo">
-            <div class="title">
-                <div class="category">{{category}}</div>
-                <div class="name">{{title}}</div>
-                <div class="info"> {{description}}</div>
-            </div>
-            <div class="images">
-                <div class="img">
-                    <div class="item">
-                        <img src="{{thumbnail}}">
-                    </div>
-                  
-                </div>
-            </div>
-            <div class="colors">
-                <label for="green">
-                    <div class="name">ss</div>
-                    <div class="ellipse" style="background:#CADB6E"></div>
-                </label>
-
-                <label for="black">
-                    <div class="name">Black</div>
-                    <div class="ellipse" style="background:#2B2B2B"></div>
-                </label>
-            </div>
-            <div class="addCard">
-                <i class="fa-solid fa-basket-shopping"></i>
-            </div>
-        </div>
-        <div class="mores">
-            <div class="stars">
-                <i class="fa-regular fa-star text-yellow"></i>
-                <i class="fa-regular fa-star text-yellow"></i>
-                <i class="fa-regular fa-star text-yellow"></i>
-                <i class="fa-regular fa-star text-yellow"></i>
-                <i class="fa-regular fa-star"></i>
-            </div>
-            <div class="price">{{price}}</div>
-        </div>
-
+<h1>Lista de productos</h1>
+{{#each products}}
+<ul>
+    <li>name: {{title}}</li>
+    <li>description: {{description}}</li>
+    <li>code: {{code}}</li>
+    <li>price: {{price}}</li>
+    <li>status: {{status}}</li>
+    <li>stock: {{stock}}</li>
+    <li>category: {{category}}</li>
+    {{!-- <li>{{this.thumbnail}}</li> --}}
+</ul>
+{{/each}}
+</div>
+<div id="pagination_buttons">
+        {{#if prevPage}}
+            {{#if category}}        
+                <a id="pagination_button" href="/api/views/products/?limit={{limit}}&page={{prevPage}}&order={{order}}&category={{category}}">Prev Page</a>
+            {{else}}
+                <a id="pagination_button" href="/api/views/products/?limit={{limit}}&page={{prevPage}}&order={{order}}">Prev Page</a>
+            {{/if}}
+        {{else}}
+            <p></p>
+        {{/if}}    
+        <p id="pagination_number">Page {{page}}</p>
+        {{#if nextPage}}
+            {{#if category}}
+                <a id="pagination_button" href="/api/views/products/?limit={{limit}}&page={{nextPage}}&order={{order}}&category={{category}}">Next Page</a>
+            {{else}}
+                <a id="pagination_button" href="/api/views/products/?limit={{limit}}&page={{nextPage}}&order={{order}}">Next Page</a>
+            {{/if}}   
+        {{else}}
+            <p></p>
+        {{/if}}    
     </div>
-       {{/each}}
-   </div>
+
+<script src="/js/home.js"></script>
  

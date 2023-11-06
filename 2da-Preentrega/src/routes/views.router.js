@@ -8,8 +8,8 @@ router.get("/",async(req,res)=>{
     res.render("home",{listadeproductos})
 })
 
-router.get("/realtimeproducts",(req,res)=>{
-res.render("realtimeproducts")
+router.get("/products",(req,res)=>{
+res.render("products")
 })
 
 router.get("/", (req, res) => {
