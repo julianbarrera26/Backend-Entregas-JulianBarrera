@@ -1,5 +1,4 @@
-import { cartsModel } from "../../db/models/carts.model.js";
-
+import {cartsModel} from "../../db/models/carts.model.js"
 class CartsManager {
 
     async createCart() {
@@ -21,7 +20,7 @@ class CartsManager {
     async getCartById(cid){
        
         try {
-            const cart = await cartModel.findById(cartId)
+            const cart = await cartsModel.findById(cid)
 
             return cart;
         } catch (err) {
@@ -50,7 +49,7 @@ class CartsManager {
         const cart = await cartsModel.findById(cid);
     
         const productIndex = cart.products.findIndex((p) =>
-          p.product.equals(pid)
+          p.products.equals(pid)
         );
     
         if (productIndex === -1) {

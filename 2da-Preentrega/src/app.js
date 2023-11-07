@@ -32,7 +32,25 @@ const httpServer = app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
 
+app.get('/', async (req, res) => {
+  res.status(200).render('home', { products: products })
+})
+
+app.get('/products', async (req, res) => {
+  res.status(200).render('products', { stylesheet: 'products' })
+})
+
+app.get('/carts/:cid', async (req, res) => {
+  res.status(200).render('carts', { stylesheet: 'carts' })
+})
+
+app.get('/realtimeproducts', async (req, res) => {
+  const products = await gestionProd.getProducts()
+  res.status(200).render('realtimeproducts', { products: products })
+})
+
 const socketServer = new Server(httpServer);
+
 socketServer.on("connection", (socket) => {
   console.log(`Cliente conectado: ${socket.id}`);
   socket.on("newUser", (user) => {

@@ -11,28 +11,7 @@
     {{!-- <li>{{this.thumbnail}}</li> --}}
 </ul>
 {{/each}}
-</div>
-<div id="pagination_buttons">
-        {{#if prevPage}}
-            {{#if category}}        
-                <a id="pagination_button" href="/api/views/products/?limit={{limit}}&page={{prevPage}}&order={{order}}&category={{category}}">Prev Page</a>
-            {{else}}
-                <a id="pagination_button" href="/api/views/products/?limit={{limit}}&page={{prevPage}}&order={{order}}">Prev Page</a>
-            {{/if}}
-        {{else}}
-            <p></p>
-        {{/if}}    
-        <p id="pagination_number">Page {{page}}</p>
-        {{#if nextPage}}
-            {{#if category}}
-                <a id="pagination_button" href="/api/views/products/?limit={{limit}}&page={{nextPage}}&order={{order}}&category={{category}}">Next Page</a>
-            {{else}}
-                <a id="pagination_button" href="/api/views/products/?limit={{limit}}&page={{nextPage}}&order={{order}}">Next Page</a>
-            {{/if}}   
-        {{else}}
-            <p></p>
-        {{/if}}    
-    </div>
+
 
 <script src="/js/home.js"></script>
  
