@@ -5,6 +5,7 @@ import handlebars from 'express-handlebars';
 import viewsRouter from "./routes/views.router.js";
 import cookieRouter from "./routes/cookie.router.js";
 import session from "express-session";
+import sessionRouter from "./routes/session.router.js"
 import fileStore from "session-file-store";
 const FileStore = fileStore(session);
 import MongoStore from "connect-mongo";
@@ -36,6 +37,7 @@ app.set("view engine", "handlebars");
 // routes
 app.use("/", viewsRouter);
 app.use("/api/cookie", cookieRouter);
+app.use("/api/session", sessionRouter)
 
 
 app.listen(8080, () => {
