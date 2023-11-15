@@ -12,6 +12,8 @@ import "./db/configDB.js"
 import fileStore from "session-file-store";
 const FileStore = fileStore(session);
 import MongoStore from "connect-mongo";
+import "./passport.js";
+import passport from "passport";
 const app = express();
 
 app.use(express.json());
@@ -31,6 +33,10 @@ const URI = "mongodb+srv://julianbarrera26:G1fxY25230LPwfa0@cluster0.wp6vatq.mon
     })
   );
 
+
+//passport
+app.use(passport.initialize());
+app.use(passport.session());
 
 // handlebars
 app.engine("handlebars", handlebars.engine());
