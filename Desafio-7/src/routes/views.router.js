@@ -62,7 +62,7 @@ router.get("/profile", (req, res) => {
 });
 
 router.get("/api/views/restaurar", (req, res) => {
-  res.render("restore", {style: "restore"});
+  res.render("restaurar", {style: "restore"});
 });
 
 

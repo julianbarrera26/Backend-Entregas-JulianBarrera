@@ -21,7 +21,7 @@ router.post(
   router.post(
     "/login",
     passport.authenticate("login", {
-      successRedirect: "/api/views/products",
+      successRedirect: "/products",
       failureRedirect: "/api/views/error",
     })
   );

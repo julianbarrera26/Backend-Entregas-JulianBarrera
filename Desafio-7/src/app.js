@@ -14,10 +14,12 @@ const FileStore = fileStore(session);
 import MongoStore from "connect-mongo";
 import "./passport.js";
 import passport from "passport";
+import { productsManager } from "./dao/mongoDB/productsManagerMongo.js";
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(__dirname + "/public"));
 app.use(cookieParser("SecretCookie"));
 
 //app.use(session({store: new FileStore ({ path: __dirname + "/sessions",}),
@@ -54,3 +56,20 @@ app.use("/api/sessions", sessionsRouter)
 app.listen(8080, () => {
     console.log("Escuchando al puerto 8080");
   });
+
+  app.get('/', async (req, res) => {
+    res.status(200).render('home', { products: products })
+  })
+  
+  app.get('/products', async (req, res) => {
+    res.status(200).render('products', { stylesheet: 'products' })
+  })
+  
+  app.get('/carts/:cid', async (req, res) => {
+    res.status(200).render('carts', { stylesheet: 'carts' })
+  })
+  
+  app.get('/realtimeproducts', async (req, res) => {
+    const products = await productsManager.getProducts()
+    res.status(200).render('realtimeproducts', { products: products })
+  })

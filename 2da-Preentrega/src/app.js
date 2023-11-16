@@ -11,6 +11,7 @@ import { messagesManager } from "./dao/mongoDB/messajeManagerMongo.js";
 
 //DB
 import "./db/configDB.js";
+import { productsManager } from '../../Desafio-7/src/dao/mongoDB/productsManagerMongo.js';
 
 const app = express();
 const port = 8081;
@@ -45,7 +46,7 @@ app.get('/carts/:cid', async (req, res) => {
 })
 
 app.get('/realtimeproducts', async (req, res) => {
-  const products = await gestionProd.getProducts()
+  const products = await productsManager.getProducts()
   res.status(200).render('realtimeproducts', { products: products })
 })
 
