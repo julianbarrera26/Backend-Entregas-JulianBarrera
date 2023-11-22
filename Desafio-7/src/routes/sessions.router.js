@@ -8,12 +8,11 @@ const router = Router();
 
 
 
-// SIGNUP - LOGIN - PASSPORT LOCAL
 
 router.post(
     "/signup",
     passport.authenticate("signup", {
-      successRedirect: "/api/views/products",
+      successRedirect: "/home",
       failureRedirect: "/api/views/error",
     })
   );
@@ -34,16 +33,24 @@ router.post(
     "/auth/github",
     passport.authenticate("github", { scope: ["user:email"] })
   );
+
+  router.get('/githubcallback', passport.authenticate('github', {failureRedirect: '/login'}), async (req, res)=>{
+    console.log('req: ',req.user)
+    req.session.user = req.user.first_name
+    req.session.admin = false
+    req.session.usuario = true
+    res.redirect('http://localhost:8080/products')
+})
   
 
   router.get("/callback", passport.authenticate("github"), (req, res) => {
-    res.redirect('/api/views/products');
+    res.redirect('/products');
   });
   
 
   router.get("/signout", (req, res) => {
     req.session.destroy(() => {
-      res.redirect("/api/views/login");
+      res.redirect("/login");
     });
   });
   
@@ -53,7 +60,7 @@ router.post(
     try {
       const user = await uManager.findUserByEmail(email);      
       if (!user) {        
-        return res.redirect("/api/views/restaurar");
+        return res.redirect("/restaurar");
       }
       const hashedPassword = await hashData(password);
       user.password = hashedPassword;

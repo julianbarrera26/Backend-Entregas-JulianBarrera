@@ -11,12 +11,20 @@ const usersSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
+    required: false,
   },
   password: {
     type: String,
     required: true,
   },
+  isGithub: {
+    type: Boolean,
+    default: false,
+  },
+  isAdmin: {
+    type: Boolean,
+    required: false,
+  }
 });
 
 export const usersModel = mongoose.model("Users", usersSchema);

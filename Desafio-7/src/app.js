@@ -57,7 +57,7 @@ app.listen(8080, () => {
     console.log("Escuchando al puerto 8080");
   });
 
-  app.get('/', async (req, res) => {
+  app.get('/home', async (req, res) => {
     res.status(200).render('home', { products: products })
   })
   

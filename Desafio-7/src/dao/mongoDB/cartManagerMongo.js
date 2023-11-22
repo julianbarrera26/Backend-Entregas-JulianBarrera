@@ -21,6 +21,7 @@ class CartsManager {
        
         try {
             const cart = await cartsModel.findById(cid)
+            .populate("products.product")
 
             return cart;
         } catch (err) {
