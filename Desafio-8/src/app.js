@@ -1,4 +1,4 @@
-import express from "express";
+import  express from "express";
 import cookieParser from "cookie-parser";
 import { __dirname } from "./utils.js";
 import handlebars from 'express-handlebars';

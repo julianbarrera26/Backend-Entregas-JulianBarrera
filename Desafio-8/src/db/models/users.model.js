@@ -15,7 +15,8 @@ age:{
 },
 roll:{
     type: String,
-    required: true
+    required: true,
+    default: "USER",
 },
 email:{
     type: String,

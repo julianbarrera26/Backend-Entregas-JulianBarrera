@@ -2,6 +2,7 @@ import passport from "passport";
 import { usersManager } from "./dao/mongoDB/usersManager.js";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GithubStrategy } from "passport-github2";
+import { ExtractJwt, Strategy as JWTStrategy } from "passport-jwt";
 import { hashData, compareData } from "./utils.js";
 import { usersModel } from "./db/models/users.model.js";
 
@@ -12,8 +13,8 @@ passport.use(
     new LocalStrategy(
         { passReqToCallback: true, usernameField: "email" },
         async (req, email, password, done) => {
-            const { first_name, last_name } = req.body;
-            if (!first_name || !last_name || !email || !password) {
+            const { first_name, last_name, age, roll = "USER"} = req.body;
+            if (!first_name || !last_name || !age || !roll || !email || !password) {
                 return done(null, false);
             }
             try {
