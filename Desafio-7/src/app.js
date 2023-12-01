@@ -32,6 +32,8 @@ const URI = "mongodb+srv://julianbarrera26:G1fxY25230LPwfa0@cluster0.wp6vatq.mon
       }),
       secret: "secretSession",
       cookie: { maxAge: 60000 },
+      resave: false, 
+      saveUninitialized: true,
     })
   );
 
