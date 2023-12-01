@@ -100,24 +100,6 @@ passport.use(
     )
 );
 
-const fromCookies = (req) => {
-    return req.cookies.token;
-};
-
-// JWT
-passport.use(
-    "jwt",
-    new JWTStrategy(
-        {
-            //jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-            jwtFromRequest: ExtractJwt.fromExtractors([fromCookies]),
-            secretOrKey: "secretJWT",
-        },
-        async function (jwt_payload, done) {
-            done(null, jwt_payload);
-        }
-    )
-);
 
 passport.serializeUser((user, done) => {
     // _id

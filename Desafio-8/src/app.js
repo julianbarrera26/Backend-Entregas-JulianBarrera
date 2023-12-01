@@ -9,14 +9,13 @@ import cookieRouter from "./routes/cookie.router.js";
 import session from "express-session";
 import sessionsRouter from "./routes/sessions.router.js";
 import "./db/configDB.js"
-import fileStore from "session-file-store";
-const FileStore = fileStore(session);
 import MongoStore from "connect-mongo";
-import "./passport.js";
 import passport from "passport";
+import flash from 'express-flash';
 import { productsManager } from "./dao/mongoDB/productsManagerMongo.js";
-const app = express();
+import "./passport.js"
 
+const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + "/public"));
@@ -31,6 +30,8 @@ const URI = "mongodb+srv://julianbarrera26:G1fxY25230LPwfa0@cluster0.wp6vatq.mon
         mongoUrl: URI,
       }),
       secret: "secretSession",
+      resave: false, 
+      saveUninitialized: true,
       cookie: { maxAge: 60000 },
     })
   );

@@ -11,7 +11,7 @@ last_name:{
 },
 age:{
     type: Number,
-    required: true
+    required: false
 },
 roll:{
     type: String,
@@ -20,7 +20,7 @@ roll:{
 },
 email:{
     type: String,
-    required: true,
+    required: false,
     unique: true
 },
 password:{

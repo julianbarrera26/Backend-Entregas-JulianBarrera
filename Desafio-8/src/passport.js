@@ -71,6 +71,7 @@ passport.use(
             clientID: "Iv1.398353d5b9df7b5a",
             clientSecret: "b2328f78e163eb06a46b6e74ef83c7076928f05a",
             callbackURL: "http://localhost:8080/api/sessions/callback",
+            scope: ["user:email"]
         },
         async (accessToken, refreshToken, profile, done) => {
             try {
