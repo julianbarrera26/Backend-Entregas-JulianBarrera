@@ -2,6 +2,9 @@ import { Router } from "express";
 import {usersManager} from "../dao/mongoDB/usersManager.js"
 import { hashData, compareData } from "../utils.js";
 import passport from "passport";
+import "../passport.js"
+import { generateToken } from "../utils.js"
+
 
 const router = Router();
 
@@ -16,18 +19,25 @@ router.post(
       failureRedirect: "/api/views/error",
     })
   );
+
+  router.get('/current', passport.authenticate('jwt', {session: false}), async(req, res) => {
+    res.status(200).json({message: 'User logged', user: req.user})  
+  });
   
-  router.post(
-    "/login",
-    passport.authenticate("login", {
-      successRedirect: "/products",
-      failureRedirect: "/api/views/error",
-    })
-  );
+  router.post('/login', passport.authenticate('login', {failureMessage: true, failureRedirect: "/login"}),(req, res) => {
+   
+      
+      const {first_name, last_name, email, age, roll} = req.user    
+     
+      const token = generateToken({ first_name, last_name, email, age, roll})
+
+          
+      res.cookie('token', token, { maxAge: 60000, httpOnly: true })
+      return res.redirect('/api/sessions/current')
+  });
   
 
 
-  // SIGNUP - LOGIN - PASSPORT GITHUB
   
   router.get(
     "/auth/github",
