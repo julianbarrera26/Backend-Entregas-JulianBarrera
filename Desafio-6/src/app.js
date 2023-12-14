@@ -19,7 +19,7 @@ app.use(cookieParser("SecretCookie"));
 
 //app.use(session({store: new FileStore ({ path: __dirname + "/sessions",}),
  //   secret: "secretSession",cookie: { maxAge: 60000 }, }) );
-const URI = "mongodb+srv://julianbarrera26:G1fxY25230LPwfa0@cluster0.wp6vatq.mongodb.net/sessions?retryWrites=true&w=majority";
+const URI = "";
  app.use(
     session({
       store: new MongoStore({

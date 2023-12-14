@@ -1,35 +1,39 @@
-import { MongoCartManager } from "../dao/mongo/MongoCartManager.js";
+import { cManager } from "../dao/carts.dao.js"
 
-const mongoCartManager = new MongoCartManager
 
-class CartsService {
-    async createCart(){
-        return await mongoCartManager.createCart()
-    }
+export const createNewCart = () => {
+    const carts = cManager.createCart();
+    return carts;
+};
 
-    async getCartProducts(cid, limit, page){
-        return await mongoCartManager.getCartProducts(cid, limit, page)
-    }
+export const findCartById = (id) => {
+    const cart = cManager.getCartProducts(id);
+    return cart;
+};
 
-    async newProduct(cid, pid){
-        return await mongoCartManager.uploadProduct(cid, pid)
-    }
 
-    async deleteProduct(cid, pid){
-        return await mongoCartManager.deleteProduct(cid, pid)
-    }
+export const addProduct = (cid,pid) => {
+    const prod = cManager.addProductToCart(cid,pid);
+    return prod;
+};
 
-    async uploadProduct(cid, pid){
-        return await mongoCartManager.uploadProduct(cid, pid)
-    }
+export const deleteOneFromCart = (cid,pid) => {
+    const cart = cManager.deleteProduct(cid,pid);
+    return cart;
+};
 
-    async deleteCartProducts(cid){
-        return await mongoCartManager.deleteCartProducts(cid)
-    }
 
-    async arrayProductsUpdate(cid, data){
-        return await mongoCartManager.arrayProductsUpdate(cid, data)
-    }
-}
+export const updateAllProducts = (cid, arr) => {
+    const prods = cManager.updateAllProducts(cid, arr);
+    return prods;
+};
 
-export default CartsService
+export const updateQuantity = (cid, pid, quantity) => {
+    const prod = cManager.updateProductQuantity(cid, pid, quantity);
+    return prod;
+};
+
+export const deleteAllProductsInCart = (cid) => {
+    const cart = cManager.deleteAllProducts(cid);
+    return cart;
+};

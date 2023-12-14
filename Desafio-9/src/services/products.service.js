@@ -1,27 +1,27 @@
-import { MongoProductManager } from "../dao/mongoDB/productsManagerMongo.js";
+import { manager } from "../dao/products.dao.js";
 
-const mongoProductManager = new MongoProductManager
 
-class ProductsService {
-    async getProducts(limit){
-        return await mongoProductManager.getProducts(limit)
-    }
+export const findAllProds = (obj) => {
+  const users = manager.findAll(obj);
+  return users;
+};
 
-    async getProductById(pid){
-        return await mongoProductManager.getProductById(pid)
-    }
+export const createProd = (obj) => {
+    const user = manager.createOne(obj);
+    return user;
+};
 
-    async addProduct(title, description, price, thumbnail, code, stock, status, category){
-        return await mongoProductManager.addProduct(title, description, price, thumbnail, code, stock, status, category)
-    }
+export const findProdById = (id) => {
+const user = manager.findById(id);
+return user;
+};
 
-    async updateProduct(pid, obj){
-        return await mongoProductManager.updateProduct(pid, obj)
-    }
+export const deleteOneProd = (id) => {
+    const user = manager.deleteOne(id);
+    return user;
+};
 
-    async deleteProduct(pid){
-        return await mongoProductManager.deleteProduct(pid)
-    }
-}
-
-export default ProductsService
+export const updateProd = (id, obj) => {
+    const user = manager.updateOne(id, obj);
+    return user;
+};
