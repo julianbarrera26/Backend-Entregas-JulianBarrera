@@ -38,6 +38,8 @@ app.use(
       mongoUrl: config.mongo_uri,
     }),
     secret: "secretSession",
+    resave: false,
+    saveUninitialized: false,
     cookie: { maxAge: 60000 },
   })
   );
