@@ -3,7 +3,7 @@ import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GithubStrategy } from "passport-github2";
 import { ExtractJwt, Strategy as JWTStrategy } from "passport-jwt";
 import { usersModel } from "./config/models/users.model.js";
-import { uManager } from "./dao/users.dao.js";
+import { uManager } from "./DAL/dao/users.dao.js";
 import { hashData, compareData } from "./utils.js";
 
 
