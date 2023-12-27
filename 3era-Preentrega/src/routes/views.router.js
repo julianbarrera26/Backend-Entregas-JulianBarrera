@@ -10,7 +10,7 @@ router.get("/login", (req, res) => {
     return res.redirect('/home')
   }  
     
-  const allMessages = req.session.messages; // aca traigo el array completo de mensajes
+  const allMessages = req.session.messages;
   if(allMessages){
     const messages = allMessages[allMessages.length - 1]
     return res.render("login", {messages, style: "login"});
@@ -56,7 +56,7 @@ router.get("/restaurar", (req, res) => {
 
 
 router.get("/error", (req, res) => {
-  const allMessages = req.session.messages; // aca traigo el array completo de mensajes
+  const allMessages = req.session.messages; 
   const messages = allMessages[allMessages.length - 1]
   console.log('req.session', req.session)
   res.render("error", {messages, style: "error"});

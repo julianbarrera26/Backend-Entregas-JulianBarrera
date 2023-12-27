@@ -1,4 +1,4 @@
-import express from "express";
+import  express  from "express";
 import cookieParser from "cookie-parser";
 import { __dirname } from "./utils.js";
 import handlebars from "express-handlebars";
@@ -10,7 +10,7 @@ import session from "express-session";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/cart.router.js";
 import MongoStore from 'connect-mongo'
-/* import flash from 'express-flash'; */
+import flash from 'express-flash'; 
 import passport from "passport";
 import config from "./config.js"
 const URI = config.mongo_uri
@@ -60,7 +60,7 @@ app.set("view engine", "handlebars");
 
 // routes
 app.use("/", viewsRouter);
-/* app.use("/api/cookie", cookieRouter); */
+app.use("/api/cookie", cookieRouter);
 app.use("/api/sessions", sessionsRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/cart", cartsRouter);

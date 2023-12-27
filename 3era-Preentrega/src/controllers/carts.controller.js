@@ -88,3 +88,13 @@ export const deleteAllProductsCart = async (req, res) => {
     }
 
 }
+
+export const thePurchase = async (req, res) => {    
+    try {
+        const {cid} = req.params              
+        const response = await cartsService.purchase(cid);       
+        res.status(200).json({ /* message: "Purchase",  */response });
+    }catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+}
