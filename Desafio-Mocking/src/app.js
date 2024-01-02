@@ -9,8 +9,8 @@ import usersRouter from "./routes/users.router.js"
 import session from "express-session";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/cart.router.js";
+import { errorMiddleware } from "./middleware/errors.middleware.js";
 import MongoStore from 'connect-mongo'
-import flash from 'express-flash'; 
 import passport from "passport";
 import config from "./config.js"
 const URI = config.mongo_uri
@@ -65,6 +65,8 @@ app.use("/api/sessions", sessionsRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/cart", cartsRouter);
 app.use("/api/users", usersRouter)
+
+app.use(errorMiddleware);
 
 
 
