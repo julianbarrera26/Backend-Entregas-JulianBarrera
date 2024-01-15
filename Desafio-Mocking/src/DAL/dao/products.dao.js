@@ -39,6 +39,19 @@ class ProductsManager {
       const payload = response.docs;
       return { info, payload, page, limit, order, query };
     }
+
+    async getProducts(limit, page, filtro){
+      try {
+          let products = await productsModel.paginate(filtro, {limit: 10, page: page, lean: true})
+          // console.log(products)
+          if (!limit) {
+              return products
+          }
+          return products = await productsModel.paginate(filtro, {limit: limit, page: page, lean: true})
+      } catch (error) {
+          console.log(error)
+      }
+  }
   
   
     async createOne(obj) {

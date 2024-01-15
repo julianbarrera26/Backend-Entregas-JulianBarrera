@@ -63,11 +63,6 @@ router.get("/error", (req, res) => {
 });
 
 
-
-
-
-
-
 router.get('/home/:id', async (req, res) => {  
   try {
       const { id } = req.params

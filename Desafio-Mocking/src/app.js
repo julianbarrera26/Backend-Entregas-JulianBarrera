@@ -10,6 +10,7 @@ import session from "express-session";
 import productsRouter from "./routes/products.router.js";
 import cartsRouter from "./routes/cart.router.js";
 import { errorMiddleware } from "./middleware/errors.middleware.js";
+import {manager} from "./DAL/dao/products.dao.js"
 import MongoStore from 'connect-mongo'
 import passport from "passport";
 import config from "./config.js"
@@ -77,3 +78,20 @@ app.use(errorMiddleware);
 app.listen(PORT, () => {
   console.log("Escuchando al puerto 8080");
 });
+
+app.get('/home', async (req, res) => {
+  res.status(200).render('home', { products: products })
+})
+
+app.get('/products', async (req, res) => {
+  res.status(200).render('products', { stylesheet: 'products' })
+})
+
+app.get('/carts/:cid', async (req, res) => {
+  res.status(200).render('carts', { stylesheet: 'carts' })
+})
+
+app.get('/realtimeproducts', async (req, res) => {
+  const products = await manager.getProducts()
+  res.status(200).render('realtimeproducts', { products: products })
+})
