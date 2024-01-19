@@ -1,6 +1,6 @@
 const errorsMessages ={
 
-    PRODUCT_NOT_FOUND:"Product not foundESTEEEEE",
+    PRODUCT_NOT_FOUND:"Product not found",
     PRODUCT_ALREADY_EXISTS: "Product already exists",
     CART_NOT_FOUND:"Cart not foundESTEEEEEE",
     CART_ALREADY_EXISTS: "Cart already exists",

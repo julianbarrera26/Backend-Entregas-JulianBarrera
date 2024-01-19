@@ -18,7 +18,7 @@ export const findUserByEmail = async (req, res) => {
     const { UserEmail } = req.body;
     const user = await findByEmail(UserEmail);
     if (!user) {
-        return res.status(404).json({ message: "There is no user found with this email" });
+        CustomError.generateError(errorsMessages.USER_NOT_FOUND,404)
     }
     res.status(200).json({ message: "User found", user });
 };
