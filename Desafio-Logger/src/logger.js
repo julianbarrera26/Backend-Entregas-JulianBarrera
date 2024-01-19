@@ -1,5 +1,5 @@
 import winston from "winston"
-import { objConfigEnv } from "../src/config/config.js";
+import { config } from "../src/config.js";
 
 
 const myCustomLevels = {
@@ -33,7 +33,7 @@ const myCustomLevels = {
 
 let logger
 
-if (objConfigEnv.environment === "development") {
+if (config.environment === "development") {
 
 
 

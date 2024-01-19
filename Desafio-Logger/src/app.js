@@ -13,7 +13,8 @@ import { errorMiddleware } from "./middleware/errors.middleware.js";
 import {manager} from "./DAL/dao/products.dao.js"
 import MongoStore from 'connect-mongo'
 import passport from "passport";
-import config from "./config.js"
+import {config} from "./config.js"
+import {logger} from "../src/logger.js"
 const URI = config.mongo_uri
 const PORT = config.port
 
@@ -76,7 +77,7 @@ app.use(errorMiddleware);
 
 
 app.listen(PORT, () => {
-  console.log("Escuchando al puerto 8080");
+  logger.info("LEYENDO PUERTO 8080");
 });
 
 app.get('/home', async (req, res) => {

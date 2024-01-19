@@ -2,6 +2,7 @@ import { Router } from "express";
 import { manager } from "../DAL/dao/products.dao.js";
 import { cManager } from "../DAL/dao/carts.dao.js";
 
+import {logger} from "../logger.js"
 
 const router = Router();
 

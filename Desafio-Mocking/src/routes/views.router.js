@@ -87,6 +87,22 @@ catch (error){
 }
 })
 
+routerViews.get('/loggerTest', async (req, res) => {
+
+  logger.error("PROBANDO LOGGER ERROR")
+  logger.fatal("PROBANDO LOGGER FATAL")
+  logger.warning("PROBANDO LOGGER WARNING")
+  logger.http("PROBANDO LOGGER HTTP")
+  logger.debug("PROBANDO LOGGER DEBUG")
+  logger.info("PROBANDO LOGGER INFO")
+
+
+
+  res.render("loggerTest")
+
+
+})
+
 
 
 export default router;

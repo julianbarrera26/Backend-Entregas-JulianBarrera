@@ -2,7 +2,7 @@ import { dirname } from "path";
 import { fileURLToPath } from "url";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import config from "./config.js"
+import {config} from "./config.js"
 /*const SECRET_KEY_JWT = config.secret_jwt*/
 const SECRET_KEY_JWT = "secretJWT"; 
 
