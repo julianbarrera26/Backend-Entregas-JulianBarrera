@@ -32,14 +32,32 @@ export const findProductById = async (req, res) => {
 export const createProduct =  async (req, res) => {
     const { title, description, price, code, stock, category } = req.body;
 
+    let token = req.headers.authorization?.split(' ')[1]
+    if (!token && req.cookies) {
+        token = req.cookies.token; 
+    }
+    let user;
+    if (token){
+        const decoded = jwt.verify(token, SECRET_KEY_JWT);      
+        user = decoded;
+    }   
+
+
+
     if (!title || !description || !price || !code || !stock || ! category) {
-        return res.status(400).json({ message: "Some data is missing" });
+        logger.warning("Some data is missing")
+        return CustomError.generateError(errorsMessages.MISSING_DATA,400, ErrorName.MISSING_DATA);
     }
     try {
-        const createdProduct = await createProd(req.body);
+        const elAdmin = await uManager.findUserByRole("ADMIN")
+        if (!user){
+            user = elAdmin
+        }
+        const createdProduct = await productsService.createProd({ ...req.body, owner: user._id });
     res.status(200).json({ message: "Product created", user: createdProduct });
     }catch (error){
-        res.status(500).json({ message: error.message });
+        logger.error(error)
+        next(error)
     }
     
 };
