@@ -133,7 +133,7 @@ router.post("/mailAvisoPost", async (req, res) => {
       from:  "Julian",
       to: email,
       subject: "PROBANDO MAIL",
-      html:`<button><a href="http://localhost:8080/api/views/restaurar">RESTAURAR PASSWORD</a></button>`
+      html:`<button><a href="http://localhost:8080/restore">RESTAURAR PASSWORD</a></button>`
      })
      res.status(200).json({ message: "MAIL ENVIADO" });
   } catch (error) {
